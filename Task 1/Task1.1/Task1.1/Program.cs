@@ -48,9 +48,28 @@ namespace _1._1._1
 
         }
 
+        static void ANOTHER_TRIANGLE()
+        {
+            int N;
+            string str;
+            Console.WriteLine("Введите N: ");
+            str = Console.ReadLine();
+            N = int.Parse(str);
+
+            string leftSide, center;
+            int countOfStar  = 1;
+            for (int i = 1; i <= N; i++)
+            {
+                leftSide = new string(' ', N - i);
+                center = new string('*', countOfStar);
+                Console.WriteLine(leftSide + center);
+                countOfStar += 2;
+            }
+        }
+
         static void Main(string[] args)
         {
-            TRIANGLE();
+            ANOTHER_TRIANGLE();
         }
 
     }
