@@ -4,6 +4,7 @@ namespace _1._1._1
 {
     class Program
     {
+        // Task 1.1.1
         static void RECTANGLE()
         {
             string str;
@@ -27,9 +28,29 @@ namespace _1._1._1
             }
         }
 
+        // Task 1.1.2
+        static void TRIANGLE()
+        {
+            int N;
+            string str;
+            Console.WriteLine("Введите N: ");
+            str = Console.ReadLine();
+            N = int.Parse(str);
+
+            string answer = "*";
+            Console.WriteLine("Ответ:");
+
+            for (int i = 0; i < N; i++)
+            {
+                Console.WriteLine(answer);
+                answer += "*";
+            }
+
+        }
+
         static void Main(string[] args)
         {
-            RECTANGLE();
+            TRIANGLE();
         }
 
     }
