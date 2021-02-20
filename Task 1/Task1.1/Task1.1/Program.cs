@@ -93,9 +93,25 @@ namespace _1._1._1
             }
         }
 
+        // Task 1.1.5
+        static void SUM_OF_NUMBERS()
+        {
+            int sum = 0;
+            for (int i = 1; i < 1000; i++)
+            {
+                if (i %3 == 0 || i % 5 == 0)
+                {
+                    sum += i;
+                }
+            }
+
+            Console.WriteLine("Сумма равна: {0}", sum);
+
+        }
+
         static void Main(string[] args)
         {
-            X_MAS_TREE();
+            SUM_OF_NUMBERS();
         }
 
     }
