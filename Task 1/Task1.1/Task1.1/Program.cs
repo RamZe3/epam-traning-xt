@@ -48,6 +48,7 @@ namespace _1._1._1
 
         }
 
+        // Task 1.1.3
         static void ANOTHER_TRIANGLE()
         {
             int N;
@@ -67,9 +68,34 @@ namespace _1._1._1
             }
         }
 
+        // Task 1.1.4
+        static void X_MAS_TREE()
+        {
+            int N;
+            string str;
+            Console.WriteLine("Введите N: ");
+            str = Console.ReadLine();
+            N = int.Parse(str);
+
+            string leftSide, center;
+            int countOfStar, rowsInTriangles;
+            for (int j = 1; j <= N; j++)
+            {
+                countOfStar = 1;
+                rowsInTriangles = j;
+                for (int i = 1; i <= rowsInTriangles; i++)
+                {
+                    leftSide = new string(' ', N - i);
+                    center = new string('*', countOfStar);
+                    Console.WriteLine(leftSide + center);
+                    countOfStar += 2;
+                }
+            }
+        }
+
         static void Main(string[] args)
         {
-            ANOTHER_TRIANGLE();
+            X_MAS_TREE();
         }
 
     }
