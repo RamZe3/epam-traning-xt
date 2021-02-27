@@ -110,34 +110,54 @@ namespace _1._1._1
         }
 
         // Task 1.1.6
-
-        static string showLabelOptions(string[] labelOptions)
+        static void FONT_ADJUSTMENT()
         {
-            //TODO dodelat
-            string str = "";
-            if (labelOptions.Length == 0)
-            {
-                return "None";
-            }
-            else
-            {
-                foreach (string option in labelOptions)
-                {
-                    if (option != null)
-                    {
-                        str += option + ",";
-                    }
-                }
+            string[] labelOptions = new string[4];
+            int input; string str;
 
-                if (str == "")
-                {
-                    return "None";
-                }
+            while (true)
+            {
+                Console.WriteLine("Параметры надписи: {0}", showLabelOptions(labelOptions));
+                Console.WriteLine("Введите: \n" +
+                    "     1: bold\n     2: italic\n     3: underline");
 
-                return str.Remove(str.Length - 1);
+                str = Console.ReadLine();
+                input = int.Parse(str);
+                if (input == 1)
+                {
+                    labelOptions = arrayCheck(labelOptions, "bold");
+                }
+                else if (input == 2)
+                {
+                    labelOptions = arrayCheck(labelOptions, "italic");
+                }
+                else if (input == 3)
+                {
+                    labelOptions = arrayCheck(labelOptions, "underline");
+                }
             }
         }
 
+        static string showLabelOptions(string[] labelOptions)
+        {
+            string str = "";
+
+            foreach (string option in labelOptions)
+            {
+                if (option != null)
+                {
+                    str += option + ",";
+                }
+            }
+
+            if (str == "")
+            {
+                return "None";
+            }
+
+            return str.Remove(str.Length - 1);
+        }
+        
 
         static string[] arrayCheck(string[] labelOptions, string soughtOption)
         {
@@ -169,36 +189,6 @@ namespace _1._1._1
             return answer;
         }
 
-        
-
-        static void FONT_ADJUSTMENT()
-        {
-            string[] labelOptions = new string[4];
-            int input; string str;
-            //labelOptions = arrayCheck(labelOptions, "ABS");
-            //Console.WriteLine(showLabelOptions(labelOptions));
-
-            while (true)
-            {
-                Console.WriteLine("Параметры надписи: {0}" ,showLabelOptions(labelOptions));
-                Console.WriteLine("Введите: ");
-                Console.WriteLine("     1: bold\n     2: italic\n     3: underline");
-                str = Console.ReadLine();
-                input = int.Parse(str);
-                if (input == 1)
-                {
-                    labelOptions = arrayCheck(labelOptions, "bold");
-                }
-                else if (input == 2)
-                {
-                    labelOptions = arrayCheck(labelOptions, "italic");
-                }
-                else if (input == 3)
-                {
-                    labelOptions = arrayCheck(labelOptions, "underline");
-                }
-            }
-        }
 
         // Main
         static void Main(string[] args)
