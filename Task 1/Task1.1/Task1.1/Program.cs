@@ -305,10 +305,41 @@ namespace _1._1._1
             }
         }
 
+        // Task 1.1.9
+
+        static void NON_NEGATIVE_SUM()
+        {
+            int[] arr = new int[10];
+            Random r = new Random();
+            int sum = 0;
+
+            for (int i = 0; i < 10; i++)
+            {
+                arr[i] = r.Next(-10,10);
+            }
+
+            Console.WriteLine("Arr: ");
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine("{0}: {1}", i, arr[i]);
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (arr[i] > 0)
+                {
+                    sum += arr[i];
+                }
+            }
+
+            Console.WriteLine("sum = {0}", sum);
+        }
+
         // Main
         static void Main(string[] args)
         {
-            NO_POSITIVE();
+            NON_NEGATIVE_SUM();
         }
 
     }
