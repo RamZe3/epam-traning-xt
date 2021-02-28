@@ -258,13 +258,57 @@ namespace _1._1._1
             return arr;
         }
 
+        // Task 1.1.8
 
+        static void NO_POSITIVE()
+        {
+            int[,,] arr = new int[3, 3, 3];
+            Random r = new Random();
 
+            // заполнение массива случайными числами
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        arr[i, j, k] = r.Next(-100, 100);
+                    }
+                }
+            }
+
+            // поиск значений >0
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        if (arr[i, j, k] > 0)
+                        {
+                            arr[i, j, k] = 0;
+                        }
+                    }
+                }
+            }
+
+            // вывод массива
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        Console.WriteLine("[{0},{1},{2}]: {3}", i, j, k, arr[i, j, k]);
+                    }
+                }
+            }
+        }
 
         // Main
         static void Main(string[] args)
         {
-            ARRAY_PROCESSING();
+            NO_POSITIVE();
         }
 
     }
