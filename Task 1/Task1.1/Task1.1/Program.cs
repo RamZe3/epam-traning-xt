@@ -189,11 +189,82 @@ namespace _1._1._1
             return answer;
         }
 
+        // Task 1.1.7
+        static void ARRAY_PROCESSING()
+        {
+            int[] arr = new int[20];
+            Random r = new Random();
+
+            for (int i = 0; i < 20; i++)
+            {
+                arr[i] = r.Next(100);
+            }
+
+            arr = sortArr(arr);
+
+            Console.WriteLine("Min: {0}", findMin(arr));
+            Console.WriteLine("Max: {0}", findMax(arr));
+            Console.WriteLine("Arr values:");
+
+            for (int i = 0; i < 20; i++)
+            {
+                Console.WriteLine("{0}: {1}", i, arr[i]);
+            }
+        }
+
+        static int findMax(int[] arr)
+        {
+            int max = int.MinValue;
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] > max)
+                {
+                    max = arr[i];
+                }
+            }
+            return max;
+        }
+
+        static int findMin(int[] arr)
+        {
+            int min = int.MaxValue;
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] < min)
+                {
+                    min = arr[i];
+                }
+            }
+            return min;
+        }
+
+        static int[] sortArr(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                for (int j = 0; j < arr.Length -1; j++)
+                {
+                    if (arr[i] > arr[j])
+                    {
+                        int per;
+                        per = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = per;
+                    }
+                }
+            }
+            return arr;
+        }
+
+
+
 
         // Main
         static void Main(string[] args)
         {
-            FONT_ADJUSTMENT();
+            ARRAY_PROCESSING();
         }
 
     }
