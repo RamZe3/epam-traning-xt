@@ -336,10 +336,43 @@ namespace _1._1._1
             Console.WriteLine("sum = {0}", sum);
         }
 
+        // Task 1.1.10
+
+        static void D_ARRAY()
+        {
+            int len = 3;
+            int sum = 0;
+            int[,] arr = new int[len, len];
+            Random r = new Random();
+
+            Console.WriteLine("Arr: ");
+            for (int i = 0; i < len; i++)
+            {
+                for (int j = 0; j < len; j++)
+                {
+                    arr[i, j] = r.Next(10);
+                    Console.WriteLine("[{0}, {1}]: {2}", i, j , arr[i,j]);
+                }
+            }
+
+            for (int i = 0; i < len; i++)
+            {
+                for (int j = 0; j < len; j++)
+                {
+                    if ((i + j) % 2 == 0)
+                    {
+                        sum += arr[i, j];
+                    }
+                }
+            }
+
+            Console.WriteLine("Sum = {0}", sum);
+        }
+
         // Main
         static void Main(string[] args)
         {
-            NON_NEGATIVE_SUM();
+            D_ARRAY();
         }
 
     }
