@@ -53,10 +53,32 @@ namespace Task1._2
 
         }
 
+        // Task 1.2.3
+        static void LOWERCASE()
+        {
+            int countOfWordsIsLower = 0;
+            Console.Write("ВВОД: ");
+            string str = Console.ReadLine();
+
+            //way to split from Microsoft forum
+            char[] separators = new char[] { ' ', ':', '.', ',', ';', '!', '?', '(', ')', '-', '"' };
+            string[] words = str.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string word in words)
+            {
+                if (Char.IsLower(word[0]))
+                {
+                    countOfWordsIsLower++;
+                }
+            }
+
+            Console.WriteLine("ВЫВОД: {0}", countOfWordsIsLower);
+        }
+
         // Main
         static void Main(string[] args)
         {
-            DOUBLER();
+            LOWERCASE();
             
         }
     }
