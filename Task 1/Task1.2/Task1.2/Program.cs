@@ -75,10 +75,46 @@ namespace Task1._2
             Console.WriteLine("ВЫВОД: {0}", countOfWordsIsLower);
         }
 
+        // Task 1.2.4
+        static void VALIDATOR()
+        {
+            Console.Write("ВВОД: ");
+            string str = Console.ReadLine() + "AA";
+            char[] endOfSentences = { '.', '?', '!' };
+            var sb = new StringBuilder();
+            int Length = str.Length;
+
+            //sb.Append(Char.ToUpper(str[0]));
+            for (int i = 0; i < Length; i++)
+            {
+                foreach (char item in endOfSentences)
+                {
+                    if(str[i] == item)
+                    {
+                        while (Char.IsPunctuation(str[i + 1]) || Char.IsSeparator(str[i + 1]) )
+                        {
+                            sb.Append(str[i]);
+                            i++;
+                        }
+                        sb.Append(str[i]);
+                        sb.Append(Char.ToUpper(str[i + 1]));
+                        i+=2;
+                    }
+                }
+                if (i < str.Length)
+                {
+                    sb.Append(str[i]);
+                }
+            }
+            sb = sb.Remove(Length-2, 2);
+
+           Console.WriteLine("ВЫВОД: {0}", sb.ToString());
+        }
+
         // Main
         static void Main(string[] args)
         {
-            LOWERCASE();
+            VALIDATOR();
             
         }
     }
