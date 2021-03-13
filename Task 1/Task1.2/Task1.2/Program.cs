@@ -79,26 +79,36 @@ namespace Task1._2
         static void VALIDATOR()
         {
             Console.Write("ВВОД: ");
-            string str = Console.ReadLine() + "AA";
+            string str = Console.ReadLine() + "ZZ";
             char[] endOfSentences = { '.', '?', '!' };
             var sb = new StringBuilder();
             int Length = str.Length;
 
-            //sb.Append(Char.ToUpper(str[0]));
-            for (int i = 0; i < Length; i++)
+            //checking for the first occurrence of a letter in the text
+            int j = 0;
+            while (!Char.IsLetter(str[j]) && j < Length - 1)
+            {
+                Console.WriteLine("{0}[{2}] : {1}", Char.IsLetter(str[j]), str[j], j);
+                sb.Append(str[j]);
+                j++;
+            }
+            sb.Append(Char.ToUpper(str[j]));
+            j++;
+
+            for (int i = j; i < Length; i++)
             {
                 foreach (char item in endOfSentences)
                 {
-                    if(str[i] == item)
+                    if (str[i] == item)
                     {
-                        while (Char.IsPunctuation(str[i + 1]) || Char.IsSeparator(str[i + 1]) )
+                        while (Char.IsPunctuation(str[i + 1]) || Char.IsSeparator(str[i + 1]))
                         {
                             sb.Append(str[i]);
                             i++;
                         }
                         sb.Append(str[i]);
                         sb.Append(Char.ToUpper(str[i + 1]));
-                        i+=2;
+                        i += 2;
                     }
                 }
                 if (i < str.Length)
@@ -106,9 +116,9 @@ namespace Task1._2
                     sb.Append(str[i]);
                 }
             }
-            sb = sb.Remove(Length-2, 2);
+            sb = sb.Remove(Length - 2, 2);
 
-           Console.WriteLine("ВЫВОД: {0}", sb.ToString());
+            Console.WriteLine("ВЫВОД: {0}", sb.ToString());
         }
 
         // Main
