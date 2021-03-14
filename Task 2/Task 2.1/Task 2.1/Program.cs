@@ -95,13 +95,80 @@ namespace Task_2._1
         }
 
     }
-    class Program
+
+
+    // Task 2.1.2
+
+    public class Point
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+
+        public Point(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        override
+        public string ToString()
+        {
+            string str = String.Format("X:{0} Y:{1}", this.x, this.y);
+            return str;
+        }
+
+    }
+
+    public class Circle : Point
+    {
+        public int r { get; set; }
+
+        public Circle(int x, int y, int r) : base(x,y)
+        {
+            this.r = r;
+        }
+
+        public double CalculateLength() => 2 * Math.PI * this.r;
+
+        public double CalculateArea() => Math.PI * this.r * this.r;
+
+        override
+        public string ToString()
+        {
+            string str = String.Format(" R:{0}", this.r);
+            return base.ToString() + str;
+        }
+
+    }
+
+    public class Ring : Circle
+    {
+        public int outerRadius { get; set; }
+        public Ring(int x, int y, int r, int outerRadius) : base(x,y,r)
+        {
+            this.outerRadius = outerRadius;
+        }
+
+        new
+        public double CalculateArea() => Math.PI * (this.outerRadius * this.outerRadius - this.r * this.r);
+        new
+        public double CalculateLength() => CalculateLength() + 2 * Math.PI * this.outerRadius;
+
+        override
+        public string ToString()
+        {
+            string str = String.Format(" OuterRadius:{0}", this.outerRadius);
+            return base.ToString() + str;
+        }
+
+    }
+
+        class Program
     {
         static void Main(string[] args)
         {
             // Task 2.1.1
             char[] arr = { 'd', 'e', 'f' };
-            CustomString cs1 = new CustomString("abc");
             CustomString cs1 = new CustomString("abc");
             CustomString cs2 = new CustomString(arr);
             cs1.Append(cs2);
@@ -110,6 +177,10 @@ namespace Task_2._1
             Console.WriteLine("ConvertToArray[0]: {0}", cs1.ConvertToArray()[0]);
             Console.WriteLine("Compare: {0}", cs1.Compare(cs2));
             Console.WriteLine("Length: {0}", cs1.Length);
+
+            // Task 2.1.2
+            Ring ring = new Ring(0, 0, 1, 2);
+            Console.WriteLine(ring);
         }
     }
 }
