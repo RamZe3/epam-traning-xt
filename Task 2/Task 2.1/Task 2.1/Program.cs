@@ -99,7 +99,48 @@ namespace Task_2._1
 
     // Task 2.1.2
 
-    public class Point
+    public enum FigureType : byte
+    {
+        Point = 0,
+        Circle = 1,
+        Ring = 2,
+        Line = 3,
+    }
+
+    
+
+    public class CreateFigure
+    {
+        public Figure Create(FigureType type)
+        {
+            switch (type)
+            {
+                case FigureType.Point:
+                    Console.WriteLine("X Y");
+                    return new Point(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));                   
+                case FigureType.Circle:
+                    Console.WriteLine("X Y R");
+                    return new Circle(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                case FigureType.Ring:
+                    Console.WriteLine("X Y R outR");
+                    return new Ring(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                case FigureType.Line:
+                    Console.WriteLine("X Y");
+                    return new Point(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                default:
+                    return new Point(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+            }
+
+        }
+    }
+
+    public abstract class Figure
+    {
+
+    }
+
+
+    public class Point : Figure
     {
         public int x { get; set; }
         public int y { get; set; }
@@ -163,8 +204,33 @@ namespace Task_2._1
 
     }
 
+    public class Line : Figure
+    {
+        Point point1;
+        Point point2;
+        public Line(int x1, int y1, int x2, int y2)
+        {
+            this.point1.x = x1;
+            this.point1.y = y1;
+            this.point2.x = x2;
+            this.point2.y = y2;
+        }
+    }
+
+
+    // Main
         class Program
     {
+        public static FigureType ReadFigureType()
+        {
+            do
+            {
+                string value = Console.ReadLine();
+                if (Enum.TryParse<FigureType>(value, out FigureType result))
+                    return result;
+
+            } while (true);
+        }
         static void Main(string[] args)
         {
             // Task 2.1.1
@@ -179,8 +245,41 @@ namespace Task_2._1
             Console.WriteLine("Length: {0}", cs1.Length);
 
             // Task 2.1.2
-            Ring ring = new Ring(0, 0, 1, 2);
-            Console.WriteLine(ring);
+            Figure[] figures = new Figure[100];
+            int count = 0;
+            CreateFigure createfigure = new CreateFigure();
+            while (true)
+            {
+                string str;
+                Console.WriteLine(" Выберите действие\n1.Добавить фигуру\n2.Вывести фигуры\n3.Очистить холст\n4.Выход");
+                str = Console.ReadLine();
+                if (str == "4")
+                {
+                    break;
+                }
+                switch (str)
+                {
+                    case "1":
+                        Console.WriteLine("Введите название фигуры");
+                        Figure figure = createfigure.Create(ReadFigureType());
+                        figures[count] = figure;
+                        count++;
+                        break;
+                    case "2":
+                        for (int i = 0; i < count; i++)
+                        {
+                            Console.WriteLine(figures[i].ToString());
+                        }
+                        break;
+                    case "3":
+                        figures = new Figure[100];
+                        count = 0;
+                        break;
+
+                }
+
+
+            }
         }
     }
 }
