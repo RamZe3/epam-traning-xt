@@ -226,11 +226,17 @@ namespace Task_2._1
             this.point2 = new Point(x2, y2);
         }
 
+        public int Lenth(Point point1, Point point2)
+        {
+            return (int)Math.Sqrt((point1.x - point2.x) * (point1.x - point2.x) + (point1.y - point2.y) * (point1.y - point2.y));
+        }
+
         override
         public string ToString()
         {
+            string Lenth_ = "Lenth: " + Lenth(this.point1, this.point2).ToString();
             string str = String.Format("X1: {0} Y1: {1} X2: {2} Y2: {3}", this.point1.x, this.point1.y, this.point2.x, this.point2.y);
-            return this.GetType().Name + " " + str;
+            return this.GetType().Name + " " + str + " " + Lenth_;
         }
     }
 
@@ -243,12 +249,17 @@ namespace Task_2._1
             this.point3 = new Point(x3, y3);
             this.point4 = new Point(x4, y4);
         }
+
+
         override
         public string ToString()
         {
+            int LenthR = Lenth(this.point1, this.point2) + Lenth(this.point2, this.point3) +
+                Lenth(this.point3, this.point4) + Lenth(this.point4, this.point1);
+            string Lenth_ = " Lenth: " + LenthR;
             string str = String.Format("X1: {0} Y1: {1} X2: {2} Y2: {3}\n" +
                 "X3: {4} Y3: {5} X4: {6} Y4: {7}", this.point1.x, this.point1.y, this.point2.x, this.point2.y, 
-                this.point3.x, this.point3.y, this.point4.x, this.point4.y);
+                this.point3.x, this.point3.y, this.point4.x, this.point4.y) + Lenth_;
             return this.GetType().Name + " " + str;
         }
     }
@@ -263,6 +274,8 @@ namespace Task_2._1
         override
         public string ToString()
         {
+            int LenthT = Lenth(this.point1, this.point2) + Lenth(this.point2, this.point3) +
+                Lenth(this.point3, this.point1);
             string str = String.Format("X1: {0} Y1: {1} X2: {2} Y2: {3} X3: {4} Y3: {5}", this.point1.x, this.point1.y, this.point2.x, this.point2.y,
                 this.point3.x, this.point3.y);
             return this.GetType().Name + " " + str;
@@ -318,6 +331,11 @@ namespace Task_2._1
                         count++;
                         break;
                     case "2":
+                        if (count == 0)
+                        {
+                            Console.WriteLine("Фигур нет");
+                            break;
+                        }
                         for (int i = 0; i < count; i++)
                         {
                             Console.WriteLine(figures[i].ToString());
