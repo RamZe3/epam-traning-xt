@@ -105,6 +105,8 @@ namespace Task_2._1
         Circle = 1,
         Ring = 2,
         Line = 3,
+        Rectangle = 4,
+        Triangle =5,
     }
 
     
@@ -125,8 +127,16 @@ namespace Task_2._1
                     Console.WriteLine("X Y R outR");
                     return new Ring(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
                 case FigureType.Line:
-                    Console.WriteLine("X Y");
-                    return new Point(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                    Console.WriteLine("X1 Y1 X2 Y2");
+                    return new Line(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                case FigureType.Rectangle:
+                    Console.WriteLine("X1 Y1 X2 Y2 X3 Y3 X4 Y4");
+                    return new Rectangle(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()),
+                        int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                case FigureType.Triangle:
+                    Console.WriteLine("X1 Y1 X2 Y2 X3 Y3");
+                    return new Triangle(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()),
+                        int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
                 default:
                     return new Point(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
             }
@@ -136,7 +146,7 @@ namespace Task_2._1
 
     public abstract class Figure
     {
-
+        public override abstract string ToString();
     }
 
 
@@ -155,7 +165,7 @@ namespace Task_2._1
         public string ToString()
         {
             string str = String.Format("X:{0} Y:{1}", this.x, this.y);
-            return str;
+            return this.GetType().Name + " " + str;
         }
 
     }
@@ -176,7 +186,9 @@ namespace Task_2._1
         override
         public string ToString()
         {
-            string str = String.Format(" R:{0}", this.r);
+            string str = String.Format(" R:{0}", this.r) +
+                " Area: " + (int)this.CalculateArea() +
+                " Length: " + (int)this.CalculateLength();
             return base.ToString() + str;
         }
 
@@ -206,20 +218,60 @@ namespace Task_2._1
 
     public class Line : Figure
     {
-        Point point1;
-        Point point2;
+        public Point point1;
+        public Point point2;
         public Line(int x1, int y1, int x2, int y2)
         {
-            this.point1.x = x1;
-            this.point1.y = y1;
-            this.point2.x = x2;
-            this.point2.y = y2;
+            this.point1 = new Point(x1, y1);
+            this.point2 = new Point(x2, y2);
+        }
+
+        override
+        public string ToString()
+        {
+            string str = String.Format("X1: {0} Y1: {1} X2: {2} Y2: {3}", this.point1.x, this.point1.y, this.point2.x, this.point2.y);
+            return this.GetType().Name + " " + str;
+        }
+    }
+
+    public class Rectangle : Line
+    {
+        Point point3;
+        Point point4;
+        public Rectangle(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) : base(x1, y1, x2, y2)
+        {
+            this.point3 = new Point(x3, y3);
+            this.point4 = new Point(x4, y4);
+        }
+        override
+        public string ToString()
+        {
+            string str = String.Format("X1: {0} Y1: {1} X2: {2} Y2: {3}\n" +
+                "X3: {4} Y3: {5} X4: {6} Y4: {7}", this.point1.x, this.point1.y, this.point2.x, this.point2.y, 
+                this.point3.x, this.point3.y, this.point4.x, this.point4.y);
+            return this.GetType().Name + " " + str;
+        }
+    }
+
+    public class Triangle : Line
+    {
+        Point point3;
+        public Triangle(int x1, int y1, int x2, int y2, int x3, int y3) : base(x1, y1, x2, y2)
+        {
+            this.point3 = new Point(x3, y3);
+        }
+        override
+        public string ToString()
+        {
+            string str = String.Format("X1: {0} Y1: {1} X2: {2} Y2: {3} X3: {4} Y3: {5}", this.point1.x, this.point1.y, this.point2.x, this.point2.y,
+                this.point3.x, this.point3.y);
+            return this.GetType().Name + " " + str;
         }
     }
 
 
     // Main
-        class Program
+    class Program
     {
         public static FigureType ReadFigureType()
         {
