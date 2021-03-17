@@ -17,11 +17,12 @@ namespace Task_2._2
         public Game()
         {
             this.gameObjects = new GameObject[5];
-            this.countOfGO = 4;
+            this.countOfGO = 5;
             gameObjects[0] = new Player(5, 5);
             gameObjects[1] = new Enemy(4, 5, EnemyType.Lying);
             gameObjects[2] = new Bonus(3, 5, BonusType.Cherry);
-            gameObjects[3] = new Block(4, 4);
+            gameObjects[3] = new Block(10, 10);
+            gameObjects[4] = new Enemy(9, 9, EnemyType.Standing);
         }
 
         public void Play()
@@ -37,18 +38,84 @@ namespace Task_2._2
                     gamePlay.Lose();
                     break;
                 }
-                this.gameObjects[1].move();
+                if (gamePlay.CheckTwoGameObjPosition(gameObjects[0], gameObjects[4]))
+                {
+                    gamePlay.Lose();
+                    break;
+                }
+                if (gamePlay.CheckTwoGameObjPosition(gameObjects[0], gameObjects[3]))
+                {
+                    gameObjects[0].x = gameObjects[0].lastPosition.x;
+                    gameObjects[0].y = gameObjects[0].lastPosition.y;
+                }
+                if (gamePlay.CheckTwoGameObjPosition(gameObjects[1], gameObjects[3]))
+                {
+                    gameObjects[1].x = gameObjects[1].lastPosition.x;
+                    gameObjects[1].y = gameObjects[1].lastPosition.y;
+                }
+                if (gamePlay.CheckTwoGameObjPosition(gameObjects[0], gameObjects[2]))
+                {
+                    gamePlay.Win();
+                    break;
+                }
 
-                Thread.Sleep(500);
+                string str = Console.ReadKey().KeyChar.ToString();
+                //Console.WriteLine(str);
+                switch (str)
+                {
+                    case "w":
+                        gameObjects[0].lastPosition.x = gameObjects[0].x;
+                        gameObjects[0].lastPosition.y = gameObjects[0].y;
+                        this.gameObjects[0].y--;
+                        
+                        break;
+                    case "s":
+                        gameObjects[0].lastPosition.x = gameObjects[0].x;
+                        gameObjects[0].lastPosition.y = gameObjects[0].y;
+                        gameObjects[0].y++;
+                        break;
+                    case "a":
+                        gameObjects[0].lastPosition.x = gameObjects[0].x;
+                        gameObjects[0].lastPosition.y = gameObjects[0].y;
+                        gameObjects[0].x--;
+                        break;
+                    case "d":
+                        gameObjects[0].lastPosition.x = gameObjects[0].x;
+                        gameObjects[0].lastPosition.y = gameObjects[0].y;
+                        gameObjects[0].x++;
+                        break;
+                }
+
+                this.gameObjects[1].move();
+                this.gameObjects[4].move();
+
+                //Thread.Sleep(500);
                 playingField.ClearField();
                 Console.Clear();
             }
         }
     }
-    abstract public class GameObject
+    
+    public class Point
     {
         public int x { get; set; }
         public int y { get; set; }
+
+        public Point()
+        {
+
+        }
+
+        public Point(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
+    
+    abstract public class GameObject : Point
+    {
+        public Point lastPosition = new Point();
         public string strValue;
         public virtual void move() {
         }
@@ -139,7 +206,7 @@ namespace Task_2._2
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < field.Length; i++)
             {
-                sb.Append(field[i] + "\n");
+                sb.Append(field[i] + "|\n");
             }
             return sb.ToString();
         }
@@ -147,16 +214,19 @@ namespace Task_2._2
 
     public class Player : GameObject
     {
-        
         public Player(int x, int y)
         {
             this.x = x;
             this.y = y;
+            lastPosition.x = x;
+            lastPosition.x = y;
             this.strValue = "*";
         }
 
         public  void move(int controler)
         {
+            lastPosition.x = this.x;
+            lastPosition.x = this.y;
             switch (controler)
             {
                 case 1:
@@ -183,6 +253,8 @@ namespace Task_2._2
         {
             this.x = x;
             this.y = y;
+            lastPosition.x = x;
+            lastPosition.y = y;
             switch (enemyType)
             {
                 case EnemyType.Standing:
@@ -199,6 +271,8 @@ namespace Task_2._2
 
         public override void move()
         {
+            lastPosition.x = this.x;
+            lastPosition.y = this.y;
             this.x += random.Next(-1, 2);
             this.y += random.Next(-1, 2);
         }
