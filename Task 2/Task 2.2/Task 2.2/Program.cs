@@ -5,30 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 namespace Task_2._2
-{
-    
+{ 
+    // TODO creator
     public class Game
     {
         GameObject[] gameObjects;
-        int count;
-        PlayingField playingField = new PlayingField();
+        int countOfGO;
+
+        PlayingField playingField = new PlayingField(20);
+        GamePlay gamePlay = new GamePlay();
         public Game()
         {
             this.gameObjects = new GameObject[5];
-            this.count = 3;
+            this.countOfGO = 4;
             gameObjects[0] = new Player(5, 5);
-            gameObjects[1] = new Enemy(3, 3);
-            gameObjects[2] = new Bonus(3, 5);
+            gameObjects[1] = new Enemy(4, 5, EnemyType.Lying);
+            gameObjects[2] = new Bonus(3, 5, BonusType.Cherry);
+            gameObjects[3] = new Block(4, 4);
         }
 
         public void Play()
         {
+            gamePlay.Start();
             while (true)
             {
-                playingField.ArrangementObjOnField(this.gameObjects, this.count);
+                playingField.ArrangementObjOnField(this.gameObjects, this.countOfGO);
                 Console.WriteLine(playingField.ToString());
+
+                if(gamePlay.CheckTwoGameObjPosition(gameObjects[0], gameObjects[1]))
+                {
+                    gamePlay.Lose();
+                    break;
+                }
                 this.gameObjects[1].move();
-                Console.WriteLine(this.gameObjects[1].x);
+
                 Thread.Sleep(500);
                 playingField.ClearField();
                 Console.Clear();
@@ -46,9 +56,9 @@ namespace Task_2._2
 
     public class GamePlay
     {
-        public bool CheckPlayerAndEnemyPosition(Player player, Enemy enemy)
+        public bool CheckTwoGameObjPosition(GameObject gm1, GameObject gm2)
         {
-            if (player.x == enemy.x && player.y == enemy.y)
+            if (gm1.x == gm2.x && gm1.y == gm2.y)
             {
                 return true;
             }
@@ -58,27 +68,34 @@ namespace Task_2._2
             }
         }
 
-        public bool CheckPlayerAndBonusPosition(Player player, Bonus bonus)
+        public void Start()
         {
-            if (player.x == bonus.x && player.y == bonus.y)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            Console.WriteLine("Цель игры собрать все бонусы");
+            Thread.Sleep(3000);
+        }
+
+        public void Win()
+        {
+            Console.WriteLine("U are Win)");
+        }
+
+        public void Lose()
+        {
+            Console.WriteLine("U are lose)");
         }
     }
 
     public class PlayingField
     {
         public GameObject[] gameObjects = new GameObject[100];
-        public string[] field = new string[10];
+        public string[] field;
+        public int dimension;
 
-        public PlayingField()
+        public PlayingField(int dimension)
         {
-            for (int i = 0; i < 10; i++)
+            this.dimension = dimension;
+            this.field = new string[dimension];
+            for (int i = 0; i < dimension; i++)
             {
                 field[i] = new string(' ', field.Length);
             }
@@ -86,7 +103,7 @@ namespace Task_2._2
 
         public void ClearField()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < dimension; i++)
             {
                 field[i] = new string(' ', field.Length);
             }
@@ -96,6 +113,23 @@ namespace Task_2._2
         {
             for (int i = 0; i < count; i++)
             {
+                if (gameObjects[i].x <1)
+                {
+                    gameObjects[i].x = 1;
+                }
+                else if (gameObjects[i].x > this.dimension-1)
+                {
+                    gameObjects[i].x = this.dimension - 2;
+                }
+
+                if (gameObjects[i].y < 1)
+                {
+                    gameObjects[i].y = 1;
+                }
+                else if (gameObjects[i].y > this.dimension-1)
+                {
+                    gameObjects[i].y = this.dimension - 2;
+                }
                 this.field[gameObjects[i].y] = this.field[gameObjects[i].y].Insert(gameObjects[i].x, gameObjects[i].strValue);
             }
         }
@@ -145,11 +179,22 @@ namespace Task_2._2
     public class Enemy : GameObject
     {
         Random random = new Random();
-        public Enemy(int x, int y)
+        public Enemy(int x, int y, EnemyType enemyType)
         {
             this.x = x;
             this.y = y;
-            this.strValue = "|";
+            switch (enemyType)
+            {
+                case EnemyType.Standing:
+                    this.strValue = "|";
+                    break;
+                case EnemyType.Lying:
+                    this.strValue = "_";
+                    break;
+                default:
+                    this.strValue = "E";
+                    break;
+            }
         }
 
         public override void move()
@@ -159,16 +204,54 @@ namespace Task_2._2
         }
     }
 
+    public enum EnemyType
+    {
+        None = 0,
+        Standing = 1,
+        Lying = 2,
+    }
+
     public class Bonus : GameObject
     {
-        public Bonus(int x, int y)
+        public Bonus(int x, int y, BonusType bonusType)
         {
             this.x = x;
             this.y = y;
-            this.strValue = "B";
+            switch (bonusType)
+            {
+                case BonusType.Apple:
+                    this.strValue = "A";
+                    break;
+                case BonusType.Cherry:
+                    this.strValue = "C";
+                    break;
+                case BonusType.Pear:
+                    this.strValue = "P";
+                    break;
+                default:
+                    this.strValue = "B";
+                    break;
+            }
         }
     }
 
+    public enum BonusType
+    {
+        None = 0,
+        Apple = 1,
+        Pear = 2,
+        Cherry = 3,
+    }
+
+    public class Block : GameObject
+    {
+        public Block(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+            this.strValue = "❌";
+        }
+    }
     class Program
     {
         static void Main(string[] args)
