@@ -61,7 +61,6 @@ namespace Task_2._2
                 }
 
                 string str = Console.ReadKey().KeyChar.ToString();
-                //Console.WriteLine(str);
                 switch (str)
                 {
                     case "w":
@@ -78,14 +77,51 @@ namespace Task_2._2
                         this.gameObjects[0].move(3);
                         break;
                 }
-                
 
-                this.gameObjects[1].move();
-                this.gameObjects[4].move();
-                Console.WriteLine(gameObjects[0].lastPosition.x + " " + gameObjects[0].lastPosition.x);
-                //Thread.Sleep(5000);
+                for (int i = 1; i < gameObjects.Length; i++)
+                {
+                    this.gameObjects[i].move();
+                }
+
                 playingField.ClearField();
                 Console.Clear();
+            }
+        }
+    }
+
+    public enum GOType
+    {
+        None = 0,
+        Player = 1,
+        Enemy = 2,
+        Bonus = 3,
+        Block = 4,
+    }
+    public class GOCreator
+    {
+        int dimension;
+        Random random = new Random();
+        public GOCreator(int dimension)
+        {
+            this.dimension = dimension;
+        }
+
+        public GameObject GOCreateInRandomPos(GOType goType)
+        {
+            int x = random.Next(0, dimension);
+            int y = random.Next(0, dimension);
+            switch (goType)
+            {
+                case GOType.Player:
+                    return new Player(x, y);
+                case GOType.Enemy:
+                    return new Enemy(x, y, (EnemyType)random.Next(0, 2));
+                case GOType.Bonus:
+                    return new Bonus(x, y, (BonusType)random.Next(0, 3));
+                case GOType.Block:
+                    return new Block(x, y);
+                default:
+                    return new Block(x, y);
             }
         }
     }
@@ -204,10 +240,13 @@ namespace Task_2._2
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
+            sb.Append('_', dimension+1);
+            sb.Append('\n');
             for (int i = 0; i < field.Length; i++)
             {
-                sb.Append(field[i] + "|\n");
+                sb.Append("|" + field[i] + "|\n");
             }
+            sb.Append('_', dimension+1);
             return sb.ToString();
         }
     }
@@ -248,9 +287,10 @@ namespace Task_2._2
 
     public class Enemy : GameObject
     {
-        Random random = new Random();
+        Random random;
         public Enemy(int x, int y, EnemyType enemyType)
         {
+            this.random = new Random();
             this.x = x;
             this.y = y;
             lastPosition.x = x;
@@ -271,10 +311,10 @@ namespace Task_2._2
 
         public override void move()
         {
-            lastPosition.x = this.x;
-            lastPosition.y = this.y;
-            this.x += this.random.Next(-1, 2);
-            this.y += this.random.Next(-1, 2);
+            this.lastPosition.x = this.x;
+            this.lastPosition.y = this.y;
+            this.x += this.random.Next(-2, 3);
+            this.y += this.random.Next(-2, 3);
         }
     }
 
