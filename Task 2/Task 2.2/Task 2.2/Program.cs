@@ -16,6 +16,7 @@ namespace Task_2._2
         GamePlay gamePlay = new GamePlay();
         public Game()
         {
+            // first GO in mass always Player
             this.gameObjects = new GameObject[5];
             this.countOfGO = 5;
             gameObjects[0] = new Player(5, 5);
@@ -133,8 +134,11 @@ namespace Task_2._2
 
         public void Start()
         {
-            Console.WriteLine("Цель игры собрать все бонусы");
-            Thread.Sleep(3000);
+            Console.WriteLine("Цель игры собрать все бонусы\n" +
+                "Управление WASD (Внимательнее с раскладкой)\n" +
+                "Косание врага - проигрыш\n" +
+                "Подбор бонуса - выйгрыш");
+            Thread.Sleep(4000);
         }
 
         public void Win()

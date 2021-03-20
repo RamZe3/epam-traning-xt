@@ -12,11 +12,11 @@ namespace _1._1._1
 
             Console.WriteLine("Введите a: ");
             str = Console.ReadLine();
-            a = int.Parse(str);
+            int.TryParse(str, out a);
 
             Console.WriteLine("Введите b: ");
             str = Console.ReadLine();
-            b = int.Parse(str);
+            int.TryParse(str, out b);
 
             if (a > 0 && b > 0)
             {
@@ -31,11 +31,8 @@ namespace _1._1._1
         // Task 1.1.2
         static void TRIANGLE()
         {
-            int N;
-            string str;
             Console.WriteLine("Введите N: ");
-            str = Console.ReadLine();
-            N = int.Parse(str);
+            int N = int.Parse(Console.ReadLine());
 
             string answer = "*";
             Console.WriteLine("Ответ:");
@@ -51,11 +48,8 @@ namespace _1._1._1
         // Task 1.1.3
         static void ANOTHER_TRIANGLE()
         {
-            int N;
-            string str;
             Console.WriteLine("Введите N: ");
-            str = Console.ReadLine();
-            N = int.Parse(str);
+            int N = int.Parse(Console.ReadLine());
 
             string leftSide, center;
             int countOfStar  = 1;
@@ -71,11 +65,8 @@ namespace _1._1._1
         // Task 1.1.4
         static void X_MAS_TREE()
         {
-            int N;
-            string str;
             Console.WriteLine("Введите N: ");
-            str = Console.ReadLine();
-            N = int.Parse(str);
+            int N = int.Parse(Console.ReadLine());
 
             string leftSide, center;
             int countOfStar, rowsInTriangles;
@@ -372,7 +363,7 @@ namespace _1._1._1
         // Main
         static void Main(string[] args)
         {
-            D_ARRAY();
+            X_MAS_TREE();
         }
 
     }
