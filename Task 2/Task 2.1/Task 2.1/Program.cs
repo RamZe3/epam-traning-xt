@@ -119,26 +119,24 @@ namespace Task_2._1
             {
                 case FigureType.Point:
                     Console.WriteLine("X Y");
-                    return new Point(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));                   
+                    return new Point();                   
                 case FigureType.Circle:
                     Console.WriteLine("X Y R");
-                    return new Circle(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                    return new Circle();
                 case FigureType.Ring:
                     Console.WriteLine("X Y R outR");
-                    return new Ring(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                    return new Ring();
                 case FigureType.Line:
                     Console.WriteLine("X1 Y1 X2 Y2");
-                    return new Line(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                    return new Line();
                 case FigureType.Rectangle:
                     Console.WriteLine("X1 Y1 X2 Y2 X3 Y3 X4 Y4");
-                    return new Rectangle(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()),
-                        int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                    return new Rectangle();
                 case FigureType.Triangle:
                     Console.WriteLine("X1 Y1 X2 Y2 X3 Y3");
-                    return new Triangle(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()),
-                        int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                    return new Triangle();
                 default:
-                    return new Point(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                    return new Point();
             }
 
         }
@@ -155,10 +153,10 @@ namespace Task_2._1
         public int x { get; set; }
         public int y { get; set; }
 
-        public Point(int x, int y)
+        public Point()
         {
-            this.x = x;
-            this.y = y;
+            this.x = int.Parse(Console.ReadLine());
+            this.y = int.Parse(Console.ReadLine());
         }
 
         override
@@ -174,9 +172,9 @@ namespace Task_2._1
     {
         public int r { get; set; }
 
-        public Circle(int x, int y, int r) : base(x,y)
+        public Circle() : base()
         {
-            this.r = r;
+            this.r = int.Parse(Console.ReadLine());
         }
 
         public double CalculateLength() => 2 * Math.PI * this.r;
@@ -197,9 +195,9 @@ namespace Task_2._1
     public class Ring : Circle
     {
         public int outerRadius { get; set; }
-        public Ring(int x, int y, int r, int outerRadius) : base(x,y,r)
+        public Ring() : base()
         {
-            this.outerRadius = outerRadius;
+            this.outerRadius = int.Parse(Console.ReadLine());
         }
 
         new
@@ -220,10 +218,10 @@ namespace Task_2._1
     {
         public Point point1;
         public Point point2;
-        public Line(int x1, int y1, int x2, int y2)
+        public Line()
         {
-            this.point1 = new Point(x1, y1);
-            this.point2 = new Point(x2, y2);
+            this.point1 = new Point();
+            this.point2 = new Point();
         }
 
         public int Lenth(Point point1, Point point2)
@@ -244,10 +242,10 @@ namespace Task_2._1
     {
         Point point3;
         Point point4;
-        public Rectangle(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) : base(x1, y1, x2, y2)
+        public Rectangle() : base()
         {
-            this.point3 = new Point(x3, y3);
-            this.point4 = new Point(x4, y4);
+            this.point3 = new Point();
+            this.point4 = new Point();
         }
 
 
@@ -267,9 +265,9 @@ namespace Task_2._1
     public class Triangle : Line
     {
         Point point3;
-        public Triangle(int x1, int y1, int x2, int y2, int x3, int y3) : base(x1, y1, x2, y2)
+        public Triangle() : base()
         {
-            this.point3 = new Point(x3, y3);
+            this.point3 = new Point();
         }
         override
         public string ToString()
