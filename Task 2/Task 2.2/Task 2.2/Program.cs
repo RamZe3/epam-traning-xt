@@ -64,32 +64,25 @@ namespace Task_2._2
                 switch (str)
                 {
                     case "w":
-                        gameObjects[0].lastPosition.x = gameObjects[0].x;
-                        gameObjects[0].lastPosition.y = gameObjects[0].y;
-                        this.gameObjects[0].y--;
+                        this.gameObjects[0].move(2);
                         
                         break;
                     case "s":
-                        gameObjects[0].lastPosition.x = gameObjects[0].x;
-                        gameObjects[0].lastPosition.y = gameObjects[0].y;
-                        gameObjects[0].y++;
+                        this.gameObjects[0].move(1);
                         break;
                     case "a":
-                        gameObjects[0].lastPosition.x = gameObjects[0].x;
-                        gameObjects[0].lastPosition.y = gameObjects[0].y;
-                        gameObjects[0].x--;
+                        this.gameObjects[0].move(4);
                         break;
                     case "d":
-                        gameObjects[0].lastPosition.x = gameObjects[0].x;
-                        gameObjects[0].lastPosition.y = gameObjects[0].y;
-                        gameObjects[0].x++;
+                        this.gameObjects[0].move(3);
                         break;
                 }
+                
 
                 this.gameObjects[1].move();
                 this.gameObjects[4].move();
-
-                //Thread.Sleep(500);
+                Console.WriteLine(gameObjects[0].lastPosition.x + " " + gameObjects[0].lastPosition.x);
+                //Thread.Sleep(5000);
                 playingField.ClearField();
                 Console.Clear();
             }
@@ -118,6 +111,9 @@ namespace Task_2._2
         public Point lastPosition = new Point();
         public string strValue;
         public virtual void move() {
+        }
+        public virtual void move(int controler)
+        {
         }
     }
 
@@ -218,15 +214,15 @@ namespace Task_2._2
         {
             this.x = x;
             this.y = y;
-            lastPosition.x = x;
-            lastPosition.x = y;
+            this.lastPosition.x = x;
+            this.lastPosition.x = y;
             this.strValue = "*";
         }
 
-        public  void move(int controler)
+        public override void move(int controler)
         {
-            lastPosition.x = this.x;
-            lastPosition.x = this.y;
+            this.lastPosition.x = this.x;
+            this.lastPosition.y = this.y;
             switch (controler)
             {
                 case 1:
@@ -273,8 +269,8 @@ namespace Task_2._2
         {
             lastPosition.x = this.x;
             lastPosition.y = this.y;
-            this.x += random.Next(-1, 2);
-            this.y += random.Next(-1, 2);
+            this.x += this.random.Next(-1, 2);
+            this.y += this.random.Next(-1, 2);
         }
     }
 
@@ -332,16 +328,6 @@ namespace Task_2._2
         {
             Game game = new Game();
             game.Play();
-            /*
-            GameObject[] gameObjects = new GameObject[5];
-            int count = 3;
-            gameObjects[0] = new Player(5, 5);
-            gameObjects[1] = new Enemy(3,3);
-            gameObjects[2] = new Bonus(3, 5);
-            //Console.WriteLine(gameObjects[0].x);
-            PlayingField playingField = new PlayingField();
-            playingField.ArrangementObjOnField(gameObjects, count);
-            Console.WriteLine(playingField.ToString());*/
         }
     }
 }
