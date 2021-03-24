@@ -76,26 +76,13 @@ namespace Task1._2
         }
 
         // Task 1.2.4
-        static void VALIDATOR()
+
+        static public StringBuilder ToUpper(int startIndex, StringBuilder sb, string str)
         {
-            Console.Write("ВВОД: ");
-            string str = Console.ReadLine() + "ZZ";
-            char[] endOfSentences = { '.', '?', '!' };
-            var sb = new StringBuilder();
             int Length = str.Length;
+            char[] endOfSentences = { '.', '?', '!' };
 
-            //checking for the first occurrence of a letter in the text
-            int j = 0;
-            while (!Char.IsLetter(str[j]) && j < Length - 1)
-            {
-                Console.WriteLine("{0}[{2}] : {1}", Char.IsLetter(str[j]), str[j], j);
-                sb.Append(str[j]);
-                j++;
-            }
-            sb.Append(Char.ToUpper(str[j]));
-            j++;
-
-            for (int i = j; i < Length; i++)
+            for (int i = startIndex; i < Length; i++)
             {
                 foreach (char item in endOfSentences)
                 {
@@ -117,6 +104,34 @@ namespace Task1._2
                 }
             }
             sb = sb.Remove(Length - 2, 2);
+
+            return sb;
+        }
+
+        static int FindFirstOccurrence(int startIndex, StringBuilder sbRef, string str)
+        {
+            int Length = str.Length;
+            while (!Char.IsLetter(str[startIndex]) && startIndex < Length - 1)
+            {
+                sbRef.Append(str[startIndex]);
+                startIndex++;
+            }
+            sbRef.Append(Char.ToUpper(str[startIndex]));
+            startIndex++;
+
+            return startIndex;
+        }
+
+        static void VALIDATOR()
+        {
+            Console.Write("ВВОД: ");
+            string str = Console.ReadLine() + "ZZ";
+            StringBuilder sb = new StringBuilder();
+            ref StringBuilder sbRef = ref sb;
+            int j = 0;
+
+            j = FindFirstOccurrence(j, sbRef, str);
+            sb = ToUpper(j, sb, str);
 
             Console.WriteLine("ВЫВОД: {0}", sb.ToString());
         }
