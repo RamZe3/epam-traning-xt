@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 using System.Linq;
 
@@ -10,6 +11,51 @@ namespace Task_3._1
 
 
     {
+        // Task 3.1.1
+        class CircleList<T> : List<T>
+        {
+            int startElem = 0;
+            public void RemoveThrough(int N)
+            {
+                N--;
+                int index = (N + startElem) % this.Count;
+                //Console.WriteLine(this[index]);
+                this.RemoveAt(index);
+                startElem = (N + startElem) % (this.Count+1);
+                //Console.WriteLine(this.startElem);
+            }
+        }
+
+        static void WEAKEST_LINK()
+        {
+            int N, skipPerem, countOfRound = 1;
+            CircleList<int> manInCircle = new CircleList<int>();
+            Console.WriteLine("Введите N: ");
+            int.TryParse(Console.ReadLine(),out N);
+            Console.WriteLine("Введите, какой по счету человек будет вычеркнут каждый раунд: ");
+            int.TryParse(Console.ReadLine(), out skipPerem);
+
+            for (int i = 0; i < N; i++)
+            {
+                manInCircle.Add(i + 1);
+            }
+
+            while(manInCircle.Count > 1 && manInCircle.Count >= skipPerem)
+            {
+                manInCircle.RemoveThrough(skipPerem);
+                Console.WriteLine("Раунд {0} : осталось {1}", countOfRound ,manInCircle.Count);
+                countOfRound++;
+            }
+
+            Console.WriteLine("\nЛюди в кругу: \n");
+
+            foreach(var item in manInCircle)
+            {
+                Console.WriteLine("Человек {0}", item);
+            }
+            
+        }
+
         // Task 3.1.2
         static void TEXT_ANALYSIS()
         {
@@ -71,7 +117,8 @@ namespace Task_3._1
         // Main
         static void Main(string[] args)
         {
-            TEXT_ANALYSIS();
+            WEAKEST_LINK();
+            //TEXT_ANALYSIS();
         }
     }
 }
