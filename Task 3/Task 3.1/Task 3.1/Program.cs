@@ -19,10 +19,8 @@ namespace Task_3._1
             {
                 N--;
                 int index = (N + startElem) % this.Count;
-                //Console.WriteLine(this[index]);
                 this.RemoveAt(index);
                 startElem = (N + startElem) % (this.Count+1);
-                //Console.WriteLine(this.startElem);
             }
         }
 
