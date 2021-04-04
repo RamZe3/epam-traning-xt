@@ -32,34 +32,93 @@ namespace Task_3._2
             }
         }
 
+
+        private void EnlargeArray()
+        {
+            T[] _array = new T[Capacity * 2];
+            array.CopyTo(_array, 0);
+            array = _array;
+        }
+
+        private void EnlargeArray(int size)
+        {
+            T[] _array = new T[Capacity + size];
+            array.CopyTo(_array, 0);
+            array = _array;
+        }
+
         public void Add(T obj)
         {
             if (Length == Capacity)
             {
-                // TODO
-                T[] _array = new T[array.Length*2];
-                array.CopyTo(_array, Length);
-                array = _array;
+                EnlargeArray();
             }
             array[Length] = obj;
             Length++;
         }
 
-        /*public bool Remove(T item)
+        public void AddRange(ICollection<T> collection)
         {
-            int index;
+            if (collection.Count > (Capacity - Length))
+            {
+                EnlargeArray(collection.Count);
+            }
+
+            foreach (var item in collection)
+            {
+                array[Length] = item;
+                Length++;
+            }
+        }
+
+        public bool Remove(T item)
+        {
             for (int i = 0; i < Length; i++)
             {
-                if (array[i] == item)
+                if (item.ToString() == array[i].ToString())
                 {
-
-                }
-                else
-                {
-                    return false;
+                    for (int j = i; j < Length - 1; j++)
+                    {
+                        array[j] = array[j + 1];
+                    }
+                    Length--;
+                    return true;
                 }
             }
-        }*/
+            return false;
+        }
+
+        public bool Insert(int position, T item)
+        {
+            if (position < Length && position > 0)
+            {
+                if (Length == Capacity)
+                {
+                    EnlargeArray();
+                }
+
+                for (int i = Length; i >= position; i--)
+                {
+                    array[i+1] = array[i];
+                }
+
+                array[position] = item;
+                Length++;
+
+                return true;
+            }
+            else
+            {
+                return false;
+                // TODO ОШИБКА
+            }
+        }
+
+        public T this[int index]
+        {
+            get => array[index];
+            set => array[index] = value;
+        }
     }
 
     class Program
@@ -69,12 +128,30 @@ namespace Task_3._2
             List<int> list = new List<int>();
             list.Add(34);
             list.Add(4);
-            list.Remove(0);
+            //list.Remove(4);
 
             DynamicArray<int> dynamicArray = new DynamicArray<int>(list);
-            Console.WriteLine(dynamicArray.Capacity);
             dynamicArray.Add(3);
-            Console.WriteLine(dynamicArray.Capacity);
+            dynamicArray.Add(3);
+            dynamicArray.AddRange(list); dynamicArray.AddRange(list);
+            //dynamicArray.Add(333);
+            //dynamicArray.Add(366);
+            //dynamicArray.Remove(333);
+            //Console.WriteLine(dynamicArray.Capacity);
+
+            for (int i = 0; i < dynamicArray.Length; i++)
+            {
+                Console.WriteLine(dynamicArray[i]);
+            }
+            Console.WriteLine();
+            dynamicArray.Insert(1, 666);
+            for (int i = 0; i < dynamicArray.Length; i++)
+            {
+                Console.WriteLine(dynamicArray[i]);
+            }
+
+
+    
 
         }
     }
