@@ -139,7 +139,7 @@ namespace Task1._2
         // Main
         static void Main(string[] args)
         {
-            VALIDATOR();
+            DOUBLER();
             
         }
     }

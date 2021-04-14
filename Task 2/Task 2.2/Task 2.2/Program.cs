@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Threading;
 namespace Task_2._2
 { 
-    // TODO creator
     public class Game
     {
         GameObject[] gameObjects;
@@ -89,6 +88,7 @@ namespace Task_2._2
         }
     }
 
+    // в игре не реализовано
     public enum GOType
     {
         None = 0,
@@ -97,6 +97,8 @@ namespace Task_2._2
         Bonus = 3,
         Block = 4,
     }
+
+    // в игре не реализовано
     public class GOCreator
     {
         int dimension;

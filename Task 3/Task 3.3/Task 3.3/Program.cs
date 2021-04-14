@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Linq;
 
 namespace Task_3._3
 {
@@ -36,7 +37,7 @@ namespace Task_3._3
         public class Pizzeria
         {
             private bool[] orderTable;
-            private int currentOrderNumber 
+            public int currentOrderNumber 
             {
 
                 /*get
@@ -93,16 +94,43 @@ namespace Task_3._3
             }
         }
 
+
+        static int Summ(int value)
+        {
+            return value*3;
+        }
+
         //Main
         static void Main(string[] args)
         {
             // пицерия работает максимально просто - пиццы готовятся по очереди
-            Buyer buyer = new Buyer();
+            /*Buyer buyer = new Buyer();
             Buyer buyer2 = new Buyer();
             Pizzeria pizzeria = new Pizzeria(100);
             buyer2.OrderPizza(pizzeria, "Пиперони");
-            Thread.Sleep(1000);
+            Console.WriteLine(pizzeria.currentOrderNumber + " - Номер заказа\n");
+            Thread.Sleep(2000);
             buyer.OrderPizza(pizzeria ,"Пиперони");
+            Console.WriteLine(pizzeria.currentOrderNumber + " - Номер заказа\n");
+            */
+
+            //
+
+            int[] array = { 1, 2, 3, 4 , 3};
+
+            array.SuperForeach(x => x * 2);
+            foreach (var item in array)
+            {
+                //Console.WriteLine(item);
+            }
+
+            Console.WriteLine(array.SuperSum());
+
+            Console.WriteLine(array.MostRepeated());
+
+            string str = "11 ";
+            Console.WriteLine(str.Checker());
+
         }
     }
 }

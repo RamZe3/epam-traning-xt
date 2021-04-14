@@ -5,7 +5,7 @@ using System.Collections;
 namespace Task_3._2
 {
 
-    public class DynamicArray<T>
+    public class DynamicArray<T> : IEnumerable, IEnumerable<T>
     {
         private T[] array;
         public int Length { get; private set; } = 0;
@@ -71,6 +71,7 @@ namespace Task_3._2
             }
         }
 
+        // TODO
         public bool Remove(T item)
         {
             for (int i = 0; i < Length; i++)
@@ -109,15 +110,56 @@ namespace Task_3._2
             }
             else
             {
-                return false;
-                // TODO ОШИБКА
+                throw new ArgumentOutOfRangeException("Вы вышли за границы коллекции");
             }
+        }
+
+        private T[] GetArrayWithValues()
+        {
+            T[] _array = new T[Length];
+            for (int i = 0; i < Length; i++)
+            {
+                _array[i] = array[i];
+            }
+            return _array;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return GetArrayWithValues().GetEnumerator();
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return ((IEnumerable<T>)GetArrayWithValues()).GetEnumerator();
         }
 
         public T this[int index]
         {
-            get => array[index];
-            set => array[index] = value;
+            get
+            {
+                try
+                {
+                    return array[index];
+                }
+                catch
+                {
+                    throw new ArgumentOutOfRangeException("Вы вышли за границы коллекции");
+                }
+            }
+
+            set
+            {
+                try
+                {
+                    array[index] = value;
+                }
+                catch
+                {
+
+                    throw new ArgumentOutOfRangeException("Вы вышли за границы коллекции");
+                }
+            }   
         }
     }
 
@@ -141,17 +183,21 @@ namespace Task_3._2
 
             for (int i = 0; i < dynamicArray.Length; i++)
             {
-                Console.WriteLine(dynamicArray[i]);
+                //Console.WriteLine(dynamicArray[i]);
             }
             Console.WriteLine();
             dynamicArray.Insert(1, 666);
             for (int i = 0; i < dynamicArray.Length; i++)
             {
-                Console.WriteLine(dynamicArray[i]);
+                //Console.WriteLine(dynamicArray[i]);
+            }
+
+            foreach (var item in dynamicArray)
+            {
+                Console.WriteLine(item);
             }
 
 
-    
 
         }
     }
