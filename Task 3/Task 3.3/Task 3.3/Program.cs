@@ -11,25 +11,25 @@ namespace Task_3._3
         public class Buyer
         {
             public int OrderNumber { get; private set; }
-            private void WaitForPizza(Pizzeria pizzeria)
+            private void WaitForPizza(Pizzeria pizzeria, string nameOfPizza)
             {
                 // ожидание заключается в периодических вопросах о состоянии приготовления заказа
-                if (pizzeria.GetOrderInformation(OrderNumber) == "Пицца  ещё не готова!")
+                if (pizzeria.GetOrderInformation(OrderNumber) == "Пицца ещё не готова!")
                 {
-                    Console.WriteLine("Пицца  ещё не готова!");
-                    Thread.Sleep(1000);
-                    WaitForPizza(pizzeria);
+                    Console.WriteLine(string.Format("Пицца {0} ещё не готова!", nameOfPizza));
+                    Thread.Sleep(2000);
+                    WaitForPizza(pizzeria, nameOfPizza);
                 }
                 else
                 {
-                    Console.WriteLine("Пицца готова!");
+                    Console.WriteLine(string.Format("Пицца {0} готова!", nameOfPizza));
                 }
             }
 
             public void OrderPizza(Pizzeria pizzeria, string nameOfPizza)
             {
                 OrderNumber = pizzeria.TakeOrder(nameOfPizza);
-                WaitForPizza(pizzeria);
+                WaitForPizza(pizzeria, nameOfPizza);
             }
 
         }
@@ -39,24 +39,6 @@ namespace Task_3._3
             private bool[] orderTable;
             public int currentOrderNumber 
             {
-
-                /*get
-                {
-                    if (currentOrderNumber == orderTable.Length-1)
-                    {
-                        currentOrderNumber = 1;
-                        return currentOrderNumber;
-                    }
-                    else
-                    {
-                        return currentOrderNumber;
-                    }
-                }
-
-                set
-                {
-                    currentOrderNumber = value;
-                }*/
                 get; set;
             }
 
@@ -83,7 +65,7 @@ namespace Task_3._3
                 }
                 else
                 {
-                    return "Пицца  ещё не готова!";
+                    return "Пицца ещё не готова!";
                 }
             }
 
@@ -95,7 +77,7 @@ namespace Task_3._3
         }
 
 
-        static int Summ(int value)
+        static int ValueXThree(int value)
         {
             return value*3;
         }
@@ -104,21 +86,22 @@ namespace Task_3._3
         static void Main(string[] args)
         {
             // пицерия работает максимально просто - пиццы готовятся по очереди
-            /*Buyer buyer = new Buyer();
+            Buyer buyer = new Buyer();
             Buyer buyer2 = new Buyer();
             Pizzeria pizzeria = new Pizzeria(100);
-            buyer2.OrderPizza(pizzeria, "Пиперони");
+            buyer2.OrderPizza(pizzeria, "Пепперони");
             Console.WriteLine(pizzeria.currentOrderNumber + " - Номер заказа\n");
             Thread.Sleep(2000);
-            buyer.OrderPizza(pizzeria ,"Пиперони");
+            buyer.OrderPizza(pizzeria ,"4 сыра");
             Console.WriteLine(pizzeria.currentOrderNumber + " - Номер заказа\n");
-            */
+            
 
             //
 
             int[] array = { 1, 2, 3, 4 , 3};
 
             array.SuperForeach(x => x * 2);
+            array.SuperForeach(ValueXThree);
             foreach (var item in array)
             {
                 //Console.WriteLine(item);
