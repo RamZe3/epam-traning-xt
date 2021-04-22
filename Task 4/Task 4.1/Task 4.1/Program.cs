@@ -32,54 +32,35 @@ namespace Task_4._1
 
         public void CreateReserveDirectory()
         {
-            /*
-            //reserveDirectoryWithDate = reserveDirectory + @"\" + GetDate();
-            CopyFilesFromDir(directory);
-            foreach (var dir in directoryInfo.GetDirectories())
-            {
-                Directory.CreateDirectory(reserveDirectory + dir + @"\");
-                CopyFilesFromDir(directory + dir + @"\");
-            }*/
-
+            Console.WriteLine(directory);
             reserveDirectoryWithDate = reserveDirectory + @"\" + GetDate() + @"\";
             Directory.CreateDirectory(reserveDirectoryWithDate);
-            CopyFilesFromDir(directory);
-            //foreach (var dir in directoryInfo.GetDirectories())
-            //{
-            //    Directory.CreateDirectory(reserveDirectoryWithDate + dir + @"\");
-            //    CopyFilesFromDir(directory + dir + @"\");
-            //}
-            ForeachDirs(directory, reserveDirectoryWithDate);
+            CopyFilesFromDir(directory, reserveDirectoryWithDate);
+            ForeachDirsCopy(directory, reserveDirectoryWithDate, reserveDirectoryWithDate);
         }
 
-        public void ForeachDirs(string directory, string reserveDirectoryWithDate)
+        public void ForeachDirsCopy(string indirectory, string outdirectory, string mainoutdirectory)
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(directory);
+            DirectoryInfo directoryInfo = new DirectoryInfo(indirectory);
             foreach (var dir in directoryInfo.GetDirectories())
             {
-                //Console.WriteLine(directory + dir);
-                Directory.CreateDirectory(reserveDirectoryWithDate + dir + @"\");
-                CopyFilesFromDir(directory + dir + @"\");
-                ForeachDirs(directory+ dir +  @"\", reserveDirectoryWithDate + dir + @"\");
+                Directory.CreateDirectory(outdirectory + dir + @"\");
+                CopyFilesFromDir(indirectory + dir + @"\", mainoutdirectory);
+                ForeachDirsCopy(indirectory+ dir +  @"\", outdirectory + dir + @"\", mainoutdirectory);
             }
 
         }
 
-        private void CopyFilesFromDir(string directory)
+        public void CopyFilesFromDir(string directory, string outdirectory)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(directory);
             string dirWithoutMain = directory.Replace(this.directory, "");
-            //Console.WriteLine(directory);
-            //Console.WriteLine(this.directory);
-            //Console.WriteLine(dirWithoutMain);
-            //Console.WriteLine();
             try
             {
                 foreach (var file in dirInfo.GetFiles("*.txt"))
                 {
-                    File.Copy(file.FullName, reserveDirectoryWithDate + dirWithoutMain +  file.Name, true);
-                    //File.Copy(file.FullName, reserveDirectory + dirWithoutMain +  file.Name, true);
-                    //Console.WriteLine(file.DirectoryName);
+                    Console.WriteLine(outdirectory + dirWithoutMain + file.Name);
+                    File.Copy(file.FullName, outdirectory + dirWithoutMain +  file.Name, true);
                 }
 
             }
@@ -88,6 +69,28 @@ namespace Task_4._1
                 throw ex;
             }
         }
+
+        public void ComeBack_()
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(reserveDirectory);
+            int count = 1;
+            Console.WriteLine("Выберете дату копирования:");
+            Console.WriteLine("   Год-Месяц-День-Час-Мин");
+            foreach (var dir in directoryInfo.GetDirectories())
+            {
+                Console.WriteLine( count + ": " + dir);
+                count++;
+            }
+        }
+
+        public void ComeBack(string nameOfDir)
+        {
+            reserveDirectoryWithDate = nameOfDir;
+            CopyFilesFromDir(reserveDirectoryWithDate, directory);
+            ForeachDirsCopy(reserveDirectoryWithDate, directory, directory);
+        }
+
+
 
     }
 
@@ -126,15 +129,21 @@ namespace Task_4._1
             FileManager fileManager = new FileManager(dir);
             //fileManager.CopyFiles();
             //Console.WriteLine('\n');
-            fileManager.CreateReserveDirectory();
             //Console.WriteLine('\n');
             //Console.WriteLine(Directory.GetAccessControl(dir));
+
+            fileManager.CreateReserveDirectory();
+
+
 
             string ert = "asdqasd";
             string asdf = ert.Replace("asdq", "");
             //Console.WriteLine(asdf);
             //Console.WriteLine();
             //Console.WriteLine(fileManager.GetDate());
+            //fileManager.ComeBack_();
+            //fileManager.CopyFilesFromDir(@"E:\EpamTestDirReserve\2021-04-22-21-12\", @"E:\EpamTestDir\");
+            //fileManager.ComeBack(@"E:\EpamTestDirReserve\2021-04-22-21-12\");
 
         }
     }
