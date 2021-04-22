@@ -44,10 +44,23 @@ namespace Task_4._1
             reserveDirectoryWithDate = reserveDirectory + @"\" + GetDate() + @"\";
             Directory.CreateDirectory(reserveDirectoryWithDate);
             CopyFilesFromDir(directory);
+            //foreach (var dir in directoryInfo.GetDirectories())
+            //{
+            //    Directory.CreateDirectory(reserveDirectoryWithDate + dir + @"\");
+            //    CopyFilesFromDir(directory + dir + @"\");
+            //}
+            ForeachDirs(directory, reserveDirectoryWithDate);
+        }
+
+        public void ForeachDirs(string directory, string reserveDirectoryWithDate)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(directory);
             foreach (var dir in directoryInfo.GetDirectories())
             {
+                //Console.WriteLine(directory + dir);
                 Directory.CreateDirectory(reserveDirectoryWithDate + dir + @"\");
                 CopyFilesFromDir(directory + dir + @"\");
+                ForeachDirs(directory+ dir +  @"\", reserveDirectoryWithDate + dir + @"\");
             }
 
         }
@@ -56,6 +69,10 @@ namespace Task_4._1
         {
             DirectoryInfo dirInfo = new DirectoryInfo(directory);
             string dirWithoutMain = directory.Replace(this.directory, "");
+            //Console.WriteLine(directory);
+            //Console.WriteLine(this.directory);
+            //Console.WriteLine(dirWithoutMain);
+            //Console.WriteLine();
             try
             {
                 foreach (var file in dirInfo.GetFiles("*.txt"))
@@ -74,6 +91,8 @@ namespace Task_4._1
 
     }
 
+
+
     class Program
     {
         static void Main(string[] args)
@@ -83,22 +102,22 @@ namespace Task_4._1
             var dir_ = Directory.GetFiles(dir);
             var dir__ = Directory.GetDirectories(dir);
             var asd = Directory.GetFileSystemEntries(dir);
-            Console.WriteLine(dir__[0]);
+            //Console.WriteLine(dir__[0]);
             foreach (var file in dir_)
             {
                 //Console.WriteLine(File.ReadAllText(file));
                 // TODO
-                Console.WriteLine(file);
-                Console.WriteLine(Path.GetFileName(file));
-                Console.WriteLine(Path.GetExtension(file));
+                //Console.WriteLine(file);
+                //Console.WriteLine(Path.GetFileName(file));
+                //Console.WriteLine(Path.GetExtension(file));
             }
-            Console.WriteLine();
+            //Console.WriteLine();
             foreach (var dir1 in dir__)
             {
-                Console.WriteLine(dir1);
+                //Console.WriteLine(dir1);
                 DirectoryInfo directoryInfo = new DirectoryInfo(dir1);
-                Console.WriteLine(Directory.GetDirectoryRoot(dir1));
-                Console.WriteLine(directoryInfo.Name);
+                //Console.WriteLine(Directory.GetDirectoryRoot(dir1));
+                //Console.WriteLine(directoryInfo.Name);
                 //Console.WriteLine(Path.GetDirectoryName(dir1));
                 Console.WriteLine();
             }
@@ -106,16 +125,16 @@ namespace Task_4._1
             //Console.WriteLine(str);
             FileManager fileManager = new FileManager(dir);
             //fileManager.CopyFiles();
-            Console.WriteLine('\n');
+            //Console.WriteLine('\n');
             fileManager.CreateReserveDirectory();
-            Console.WriteLine('\n');
-            Console.WriteLine(Directory.GetAccessControl(dir));
+            //Console.WriteLine('\n');
+            //Console.WriteLine(Directory.GetAccessControl(dir));
 
             string ert = "asdqasd";
             string asdf = ert.Replace("asdq", "");
-            Console.WriteLine(asdf);
-            Console.WriteLine();
-            Console.WriteLine(fileManager.GetDate());
+            //Console.WriteLine(asdf);
+            //Console.WriteLine();
+            //Console.WriteLine(fileManager.GetDate());
 
         }
     }
