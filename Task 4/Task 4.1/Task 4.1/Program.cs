@@ -12,6 +12,7 @@ namespace Task_4._1
         private DirectoryInfo directoryInfo;
         private string reserveDirectory;
         private string reserveDirectoryWithDate;
+        private string indirectory;
         public string directory { get; set; }
         public FileManager(string directory)
         {
@@ -32,7 +33,7 @@ namespace Task_4._1
 
         public void CreateReserveDirectory()
         {
-            Console.WriteLine(directory);
+            indirectory = directory;
             reserveDirectoryWithDate = reserveDirectory + @"\" + GetDate() + @"\";
             Directory.CreateDirectory(reserveDirectoryWithDate);
             CopyFilesFromDir(directory, reserveDirectoryWithDate);
@@ -54,7 +55,7 @@ namespace Task_4._1
         public void CopyFilesFromDir(string directory, string outdirectory)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(directory);
-            string dirWithoutMain = directory.Replace(this.directory, "");
+            string dirWithoutMain = directory.Replace(indirectory, "");
             try
             {
                 foreach (var file in dirInfo.GetFiles("*.txt"))
@@ -85,6 +86,7 @@ namespace Task_4._1
 
         public void ComeBack(string nameOfDir)
         {
+            indirectory = nameOfDir;
             reserveDirectoryWithDate = nameOfDir;
             CopyFilesFromDir(reserveDirectoryWithDate, directory);
             ForeachDirsCopy(reserveDirectoryWithDate, directory, directory);
@@ -143,7 +145,7 @@ namespace Task_4._1
             //Console.WriteLine(fileManager.GetDate());
             //fileManager.ComeBack_();
             //fileManager.CopyFilesFromDir(@"E:\EpamTestDirReserve\2021-04-22-21-12\", @"E:\EpamTestDir\");
-            //fileManager.ComeBack(@"E:\EpamTestDirReserve\2021-04-22-21-12\");
+            //fileManager.ComeBack(@"E:\EpamTestDirReserve\2021-04-22-21-34\");
 
         }
     }
