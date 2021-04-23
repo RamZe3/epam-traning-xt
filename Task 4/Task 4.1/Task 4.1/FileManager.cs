@@ -11,6 +11,12 @@ namespace Task_4._1
     {
         private string reserveDirectory;
         private string directory;
+        public bool IsCurrentDir {
+            get
+            {
+                return Directory.Exists(directory);
+            }
+        }
         private string date { get => DateTime.Now.ToString(@"yyyy-MM-dd-HH-mm"); }
 
         private string indirectory;
@@ -18,31 +24,41 @@ namespace Task_4._1
 
         public FileManager(string directory)
         {
+            if (directory[directory.Length-1] != '\\')
+            {
+                directory += @"\";
+            }
             this.directory = directory;
-            try
+
+            if (!IsCurrentDir)
+            {
+                Console.WriteLine("\nВведен некорректный адрес!\n");
+            }
+            else
             {
                 reserveDirectory = Directory.GetDirectoryRoot(directory) +
                  new DirectoryInfo(directory).Name + @"Reserve\";
                 Directory.CreateDirectory(reserveDirectory);
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine("\nВведен некорректный адрес!\n");
             }
         }
 
         public void ChangeDirectory(string directory)
         {
+            if (directory[directory.Length-1] != '\\')
+            {
+                directory += @"\";
+            }
             this.directory = directory;
-            try
+
+            if (!IsCurrentDir)
+            {
+                Console.WriteLine("\nВведен некорректный адрес!\n");
+            }
+            else
             {
                 reserveDirectory = Directory.GetDirectoryRoot(directory) +
                  new DirectoryInfo(directory).Name + @"Reserve\";
                 Directory.CreateDirectory(reserveDirectory);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("\nВведен некорректный адрес!\n");
             }
         }
 
@@ -61,6 +77,7 @@ namespace Task_4._1
                 Console.WriteLine("\nОшибка исполнения! (Введен некорректный адрес)\n");
             }      
         }
+
         public void ComeBack()
         {
             try
