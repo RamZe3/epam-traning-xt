@@ -84,6 +84,9 @@ namespace Task_4._1
             {
                 indirectory = ShowReserveDirs();
 
+                Directory.Delete(directory, true);
+                Directory.CreateDirectory(directory);
+
                 if (indirectory == null)
                 {
                     return;
