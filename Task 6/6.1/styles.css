@@ -1,0 +1,22 @@
+div{
+    color: brown;
+    width: 200px;
+    position: relative;
+    top: 20px;
+    left: 40px;
+    font-size: 16px;
+    box-shadow: 5px 5px;
+    border-radius: 20px;
+}
+
+.LIST{
+    background-color: rgb(250, 228, 152);
+    border: 1px solid black;
+    border-radius: 20px;
+    line-height: 1.5;
+    list-style: none;
+    color: rgb(130, 1, 5);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+}

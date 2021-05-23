@@ -1,0 +1,49 @@
+body{
+    position: relative;  
+    left: 100px;
+    top: 100px;
+    color: white;
+}
+div{
+    background-color: rgb(6, 144, 207);
+    border: 4px solid rgb(8, 89, 129);
+    width: 390px;
+    height: 280px;
+}
+h1{
+    position: relative;
+    left: 30px;
+    top: 5px;
+}
+hr{
+    color: white;
+}
+form{
+    position: relative;
+    left: 10px;
+    font-size: large;
+}
+.E-mail{
+    position: relative;
+    top: 15px;
+}
+.E-mailInput{
+    width: 310px;
+}
+.Password{
+    position: relative;
+    top: 35px;
+}
+.RepeatPassword{
+    position: relative;
+    bottom: 5px;
+    left: 180px;
+}
+.Button{
+    position: relative;
+    top: 20px;
+}
+.ButtonInput{
+    background-color: rgb(246, 226, 131);
+    height: 25px;
+}
