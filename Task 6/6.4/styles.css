@@ -29,13 +29,13 @@ li{
     margin-left: 50px;
 }
 .VirtualHosting{
-    border-right: 1px solid rgba(109, 109, 109, 0.849);
+    border-right: 1px solid rgba(77, 97, 121);
     margin: 10px auto;
     padding-right: 30px;
     padding-left: 5px;
 }
 .DedicatedServer{
-    border-left: 1px solid rgba(109, 109, 109, 0.849);
+    border-left: 1px solid rgba(77, 97, 121);
     margin: 10px auto;
     padding-left: 50px;
 }
