@@ -1,0 +1,50 @@
+﻿@using WebTask1.Models;
+@{
+    Layout = "~/Views/Layout/_Layout1.cshtml";
+
+    if (IsPost)
+    {
+        var login = Request["login"];
+        var pass = Request["pass"];
+        var dateOfBirth = Request["dateOfBirth"];
+        int age;
+        int.TryParse(Request["age"], out age);
+
+        if (Auth.CanRegister(login))
+        {
+            JsonConverter jsonConverter = new JsonConverter();
+            User user = new User("0", login, dateOfBirth, age, pass);
+            jsonConverter.AddUsersOnDict(user);
+            jsonConverter.WriteUsersOnFile();
+            FormsAuthentication.SetAuthCookie(login, createPersistentCookie: true);
+            Response.Redirect("/");
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                Пользователь уже зарегестрирован!
+            </div>
+        }
+    }
+}
+
+<form method="post">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Login</label>
+        <input name="login" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter login">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input name="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">dateOfBirth</label>
+        <input name="dateOfBirth" type="text" class="form-control" id="exampleInputPassword1" placeholder="dateOfBirth (01.01.2001)">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">age</label>
+        <input name="age" type="number" class="form-control" id="exampleInputPassword1" placeholder="age">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

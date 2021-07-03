@@ -1,0 +1,25 @@
+﻿@using WebTask1.Models
+
+@{
+    Layout = "~/Views/Layout/_Layout1.cshtml";
+}
+
+@{
+
+    <div class="alert alert-primary" role="alert">
+        Пользователи:
+    </div>
+
+    <br />
+
+    <ul class="list-group">
+        @{
+            JsonConverter jsonConverter = new JsonConverter();
+            foreach (var user in jsonConverter.DictOfUsers)
+            {
+                <li class="list-group-item">@user.Value.ToString()</li>
+            }
+        }
+    </ul>
+
+}

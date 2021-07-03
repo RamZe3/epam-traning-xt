@@ -1,0 +1,12 @@
+﻿@using WebTask1.Models;
+@{
+    Layout = "~/Views/Layout/_Layout1.cshtml";
+    string Title = AwardModel.Title;
+    JsonConverter jsonConverter = new JsonConverter();
+    foreach (var User in jsonConverter.DictOfUsers)
+    {
+        User.Value.DeleteAwardByName(Title);
+    }
+    jsonConverter.WriteUsersOnFile();
+    Response.Redirect("/");
+}

@@ -1,0 +1,29 @@
+﻿@using WebTask1.Models;
+@{
+    Layout = "~/Views/Layout/_Layout1.cshtml";
+
+    if (IsPost)
+    {
+        var Answer = Request["Answer"];
+
+        if (Answer == "да")
+        {
+            Response.Redirect("/Views/DeleteAwardsOnAllUsers");
+        }
+        else
+        {
+            Response.Redirect("/");
+        }
+    }
+}
+
+<form method="post">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Удалить у всех пользователей?</label>
+        <input name="Answer" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="да или нет">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+

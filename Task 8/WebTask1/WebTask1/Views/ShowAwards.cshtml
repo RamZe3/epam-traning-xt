@@ -1,0 +1,23 @@
+﻿@using WebTask1.Models
+
+@{
+    Layout = "~/Views/Layout/_Layout1.cshtml";
+}
+
+<br />
+
+<div class="alert alert-warning" role="alert">
+    Награды:
+</div>
+
+<br />
+
+<ul class="list-group">
+    @{
+        JsonConverter jsonConverter = new JsonConverter();
+        foreach (var award in jsonConverter.DictOfAwards)
+        {
+            <li class="list-group-item">@award.Value.ToString()</li>
+        }
+    }
+</ul>

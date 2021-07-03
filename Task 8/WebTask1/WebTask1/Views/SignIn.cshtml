@@ -1,0 +1,35 @@
+﻿@using WebTask1.Models;
+@{
+    Layout = "~/Views/Layout/_Layout1.cshtml";
+
+    if (IsPost)
+    {
+        var Login = Request["login"];
+        var pass = Request["pass"];
+
+        if (Auth.CanLogin(Login, pass))
+        {
+            FormsAuthentication.SetAuthCookie(Login, createPersistentCookie: true);
+            Response.Redirect("/");
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                Неверно введен логин или пароль
+            </div>
+        }
+    }
+}
+
+<form method="post">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Login</label>
+        <input name="login" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter login">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input name="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

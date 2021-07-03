@@ -1,0 +1,33 @@
+﻿@using WebTask1.Models;
+@{
+    Layout = "~/Views/Layout/_Layout1.cshtml";
+
+    if (IsPost)
+    {
+        var UserName = Request["UserName"];
+
+        JsonConverter jsonConverter = new JsonConverter();
+
+        if (jsonConverter.CheckUserInDict(UserName))
+        {
+            jsonConverter.DeleteUserOnDict(UserName);
+            jsonConverter.WriteUsersOnFile();
+            Response.Redirect("/");
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                Пользователя не существует!
+            </div>
+        }
+    }
+}
+
+<form method="post">
+    <div class="form-group">
+        <label for="exampleInputEmail1">UserName</label>
+        <input name="UserName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

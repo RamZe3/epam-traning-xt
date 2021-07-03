@@ -1,0 +1,94 @@
+﻿@using WebTask1.Models
+
+@{
+    Layout = "~/Views/Layout/_Layout1.cshtml";
+    Page.Title = "index";
+}
+
+<form method="post">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="alert alert-secondary" role="alert">
+            Приветствую @User.Identity.Name;
+        </div>
+        <button id="SignOutBtn" type="button" class="btn btn-primary">SignOut</button>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Авторизируйтесь или зарегестрируйтей для работы в приложении!
+        </div>
+        <button id="loginBtn" type="button" class="btn btn-primary">Login</button>
+        <button id="registrationBtn" type="button" class="btn btn-primary">Registration</button>
+    }
+
+    <br /><br />
+
+    <button id="addAwardOnUserBtn" type="button" class="btn btn-primary">addAwardOnUser</button>
+    <button id="addAwardOnDictBtn" type="button" class="btn btn-primary">addAwardOnDict</button>
+    <button id="delAwardOnDictBtn" type="button" class="btn btn-primary">delAwardOnDict</button>
+    <button id="delUserOnDictBtn" type="button" class="btn btn-primary">delUserOnDict</button>
+
+    <br /><br />
+
+          <button id="showUsersBtn" type="button" class="btn btn-primary">showUsers</button>
+          <button id="showAwardsBtn" type="button" class="btn btn-primary">showAwards</button>
+
+</form>
+
+
+
+<script>
+    $('#loginBtn').click(function () {
+        location.href = '/Views/SignIn';
+    })
+</script>
+
+<script>
+    $('#SignOutBtn').click(function () {
+        location.href = '/Views/SignOut';
+    })
+</script>
+
+<script>
+    $('#registrationBtn').click(function () {
+        location.href = '/Views/Registration';
+    })
+</script>
+
+
+<script>
+    $('#addAwardOnUserBtn').click(function () {
+        location.href = '/Views/AddUserAward';
+    })
+</script>
+
+<script>
+    $('#addAwardOnDictBtn').click(function () {
+        location.href = '/Views/AddAward';
+    })
+</script>
+
+<script>
+    $('#delAwardOnDictBtn').click(function () {
+        location.href = '/Views/DeleteAward';
+    })
+</script>
+
+<script>
+    $('#delUserOnDictBtn').click(function () {
+        location.href = '/Views/DeleteUser';
+    })
+</script>
+
+<script>
+    $('#showUsersBtn').click(function () {
+        location.href = '/Views/ShowUsers';
+    })
+</script>
+
+<script>
+    $('#showAwardsBtn').click(function () {
+        location.href = '/Views/ShowAwards';
+    })
+</script>
