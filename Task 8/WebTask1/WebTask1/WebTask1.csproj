@@ -162,6 +162,7 @@
     <Compile Include="Models\Auth.cs" />
     <Compile Include="Models\Award.cs" />
     <Compile Include="Models\AwardModel.cs" />
+    <Compile Include="Models\GenerationId.cs" />
     <Compile Include="Models\JsonConverter.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

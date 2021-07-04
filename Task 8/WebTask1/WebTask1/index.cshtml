@@ -9,30 +9,30 @@
     @if (User.Identity.IsAuthenticated)
     {
         <div class="alert alert-secondary" role="alert">
-            Приветствую @User.Identity.Name;
+            Приветствую, @User.Identity.Name!
         </div>
-        <button id="SignOutBtn" type="button" class="btn btn-primary">SignOut</button>
+        <button id="SignOutBtn" type="button" class="btn btn-primary">Выход</button>
     }
     else
     {
         <div class="alert alert-danger" role="alert">
             Авторизируйтесь или зарегестрируйтей для работы в приложении!
         </div>
-        <button id="loginBtn" type="button" class="btn btn-primary">Login</button>
-        <button id="registrationBtn" type="button" class="btn btn-primary">Registration</button>
+        <button id="loginBtn" type="button" class="btn btn-primary">Авторизация</button>
+        <button id="registrationBtn" type="button" class="btn btn-primary">Регистрация</button>
     }
 
     <br /><br />
 
-    <button id="addAwardOnUserBtn" type="button" class="btn btn-primary">addAwardOnUser</button>
-    <button id="addAwardOnDictBtn" type="button" class="btn btn-primary">addAwardOnDict</button>
-    <button id="delAwardOnDictBtn" type="button" class="btn btn-primary">delAwardOnDict</button>
-    <button id="delUserOnDictBtn" type="button" class="btn btn-primary">delUserOnDict</button>
+          <button id="addAwardOnUserBtn" type="button" class="btn btn-primary">Добавить награду пользователю</button>
+    <button id="addAwardOnDictBtn" type="button" class="btn btn-primary">Добавить награду в список наград</button>
+    <button id="delAwardOnDictBtn" type="button" class="btn btn-primary">Удалить награду</button>
+    <button id="delUserOnDictBtn" type="button" class="btn btn-primary">Удалить пользователя</button>
 
     <br /><br />
 
-          <button id="showUsersBtn" type="button" class="btn btn-primary">showUsers</button>
-          <button id="showAwardsBtn" type="button" class="btn btn-primary">showAwards</button>
+          <button id="showUsersBtn" type="button" class="btn btn-primary">Показать пользователей</button>
+          <button id="showAwardsBtn" type="button" class="btn btn-primary">Показать награды</button>
 
 </form>
 

@@ -13,7 +13,7 @@
         if (Auth.CanRegister(login))
         {
             JsonConverter jsonConverter = new JsonConverter();
-            User user = new User("0", login, dateOfBirth, age, pass);
+            User user = new User(GenerationId.GenerateHash(), login, dateOfBirth, age, pass);
             jsonConverter.AddUsersOnDict(user);
             jsonConverter.WriteUsersOnFile();
             FormsAuthentication.SetAuthCookie(login, createPersistentCookie: true);
