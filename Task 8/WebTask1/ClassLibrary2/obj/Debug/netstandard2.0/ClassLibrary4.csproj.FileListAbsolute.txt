@@ -1,0 +1,9 @@
+E:\epam-traning-xt\Task 8\WebTask1\ClassLibrary2\obj\Debug\netstandard2.0\ClassLibrary4.AssemblyInfoInputs.cache
+E:\epam-traning-xt\Task 8\WebTask1\ClassLibrary2\obj\Debug\netstandard2.0\ClassLibrary4.AssemblyInfo.cs
+E:\epam-traning-xt\Task 8\WebTask1\ClassLibrary2\obj\Debug\netstandard2.0\ClassLibrary4.csproj.CoreCompileInputs.cache
+E:\epam-traning-xt\Task 8\WebTask1\ClassLibrary2\bin\Debug\netstandard2.0\ClassLibrary4.deps.json
+E:\epam-traning-xt\Task 8\WebTask1\ClassLibrary2\bin\Debug\netstandard2.0\ClassLibrary4.dll
+E:\epam-traning-xt\Task 8\WebTask1\ClassLibrary2\bin\Debug\netstandard2.0\ClassLibrary4.pdb
+E:\epam-traning-xt\Task 8\WebTask1\ClassLibrary2\obj\Debug\netstandard2.0\ClassLibrary4.dll
+E:\epam-traning-xt\Task 8\WebTask1\ClassLibrary2\obj\Debug\netstandard2.0\ClassLibrary4.pdb
+E:\epam-traning-xt\Task 8\WebTask1\ClassLibrary2\obj\Debug\netstandard2.0\ClassLibrary4.csproj.AssemblyReference.cache

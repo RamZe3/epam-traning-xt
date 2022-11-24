@@ -1,8 +1,13 @@
 ﻿@using WebTask1.Models
+@using ClassLibrary2
+@using NLog;
 
 @{
     Layout = "~/Views/Layout/_Layout1.cshtml";
     Page.Title = "index";
+    Logger logger = LogManager.GetCurrentClassLogger();
+    logger.Info("heello");
+
 }
 
 <form method="post">
@@ -24,15 +29,18 @@
 
     <br /><br />
 
-          <button id="addAwardOnUserBtn" type="button" class="btn btn-primary">Добавить награду пользователю</button>
-    <button id="addAwardOnDictBtn" type="button" class="btn btn-primary">Добавить награду в список наград</button>
-    <button id="delAwardOnDictBtn" type="button" class="btn btn-primary">Удалить награду</button>
-    <button id="delUserOnDictBtn" type="button" class="btn btn-primary">Удалить пользователя</button>
+    @if (User.IsInRole("admin"))
+    {
+        <button id="addAwardOnUserBtn" type="button" class="btn btn-primary">Добавить награду пользователю</button>
+        <button id="addAwardOnDictBtn" type="button" class="btn btn-primary">Добавить награду в список наград</button>
+        <button id="delAwardOnDictBtn" type="button" class="btn btn-primary">Удалить награду</button>
+        <button id="delUserOnDictBtn" type="button" class="btn btn-primary">Удалить пользователя</button>
+    }
 
     <br /><br />
 
-          <button id="showUsersBtn" type="button" class="btn btn-primary">Показать пользователей</button>
-          <button id="showAwardsBtn" type="button" class="btn btn-primary">Показать награды</button>
+    <button id="showUsersBtn" type="button" class="btn btn-primary">Показать пользователей</button>
+    <button id="showAwardsBtn" type="button" class="btn btn-primary">Показать награды</button>
 
 </form>
 

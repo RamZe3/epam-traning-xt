@@ -7,7 +7,7 @@
         var UserName = Request["UserName"];
 
         JsonConverter jsonConverter = new JsonConverter();
-
+        
         if (jsonConverter.CheckUserInDict(UserName))
         {
             jsonConverter.DeleteUserOnDict(UserName);

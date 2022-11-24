@@ -68,7 +68,6 @@ E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\ru\System.Web.Razor.resources.dl
 E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\ru\System.Web.WebPages.resources.dll
 E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\ru\System.Web.WebPages.Deployment.resources.dll
 E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\ru\System.Web.WebPages.Razor.resources.dll
-E:\epam-traning-xt\Task 8\WebTask1\WebTask1\obj\Debug\WebTask1.csprojAssemblyReference.cache
 E:\epam-traning-xt\Task 8\WebTask1\WebTask1\obj\Debug\WebTask1.csproj.CoreCompileInputs.cache
 E:\epam-traning-xt\Task 8\WebTask1\WebTask1\obj\Debug\WebTask1.csproj.CopyComplete
 E:\epam-traning-xt\Task 8\WebTask1\WebTask1\obj\Debug\WebTask1.dll
@@ -93,3 +92,10 @@ E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\System.Text.Encodings.Web.xml
 E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\System.Text.Json.xml
 E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\System.Threading.Tasks.Extensions.xml
 E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\System.ValueTuple.xml
+E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\ClassLibrary1.dll
+E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\ClassLibrary4.dll
+E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\NLog.dll
+E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\ClassLibrary1.pdb
+E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\ClassLibrary4.pdb
+E:\epam-traning-xt\Task 8\WebTask1\WebTask1\bin\NLog.xml
+E:\epam-traning-xt\Task 8\WebTask1\WebTask1\obj\Debug\WebTask1.csproj.AssemblyReference.cache

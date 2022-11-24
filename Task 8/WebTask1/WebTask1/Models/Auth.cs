@@ -32,5 +32,10 @@ namespace WebTask1.Models
             }
             return true;
         }
+
+        public static List<User> usersTest()
+        {
+            return new List<User>();
+        }
     }
 }

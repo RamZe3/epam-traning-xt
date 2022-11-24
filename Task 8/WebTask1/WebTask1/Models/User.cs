@@ -12,6 +12,7 @@ namespace WebTask1.Models
         public string dateOfBirth { get; set; }
         public int age { get; set; }
         public string pass { get; set; }
+        public string role { get; set; } = "user";
 
         public Award[] awards { get; set; } = new Award[10];
         public int AwardCount { get; set; } = 0; 
